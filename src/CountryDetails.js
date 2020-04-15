@@ -1,46 +1,52 @@
 import React, { Component }  from 'react';
 import axios from 'axios';
 import './App.css';
+import CapitalWeather from './CapitalWeather';
 
 class CountryDetailsComponent extends Component{
    constructor(props){
        super(props);
            this.state={
-                datas:null,
-                value=null
+             weatherDatas:null ,
+             flag:false  
              
            }
    }
-   componentDidMount(){
-    this.getData()
-   }
-
-   getData=()=>{
+   onSubmit=()=>{
     axios.get(`https://restcountries.eu/rest/v2/name/${this.state.value}`)
     .then(res => {
      const persons = res.data;
-     this.setState({ datas:persons });
+     this.setState({ weatherDatas:persons,flag:true });
    })
-   }
-   handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+}
 
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
+ 
     render(){
+        
+        const { datas } = this.props
+        console.log("propss",datas[0])
         return(
-        <> 
-        <form onSubmit={this.handleSubmit}>
-        <label>
-          Country:
-          <input type="text" placeholder="Enter Country" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-        </>)
+          <>  {(this.state.flag ===true)? <CapitalWeather capital={datas[0].capital} /> : 
+         <> <table>
+           <tr><th>Capital  </th>
+            <th>population</th>
+            <th>latlng</th>
+            <th>Flag</th>
+
+            </tr>
+            <tr>
+        <td>{datas[0].capital}</td>
+        <td>{datas[0].population}</td>
+        <td>{datas[0].latlng[0]},{datas[0].latlng[1]}</td>
+            <td><img src={datas[0].flag} alt="flag" style={{width:"50px"}}/></td>
+
+            </tr>
+
+
+        </table>
+        <button onClick={this.onSubmit}>Capital Weather</button></>
+      
+          }</>)
     }
 }
 export default CountryDetailsComponent
