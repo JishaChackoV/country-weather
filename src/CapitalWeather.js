@@ -20,7 +20,7 @@ class CapitalWeather extends Component {
     render() {
 
         const { datas } = this.props
-        console.log("propss")
+        console.log("pss",this.state.weatherDatas.current)
         return (
             <>
                 <table>

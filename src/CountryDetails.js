@@ -13,11 +13,9 @@ class CountryDetailsComponent extends Component{
            }
    }
    onSubmit=()=>{
-    axios.get(`https://restcountries.eu/rest/v2/name/${this.state.value}`)
-    .then(res => {
-     const persons = res.data;
-     this.setState({ weatherDatas:persons,flag:true });
-   })
+
+     this.setState({ flag:true });
+   
 }
 
  
