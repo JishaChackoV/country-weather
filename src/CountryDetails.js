@@ -13,8 +13,14 @@ class CountryDetailsComponent extends Component{
            }
    }
    onSubmit=()=>{
-
-     this.setState({ flag:true });
+    axios.get(`http://api.weatherstack.com/current?access_key=a4d0ea5a1be955cd432fb657b6742939&query=${this.props.datas[0].capital}`)
+    .then(res => {
+        const persons = res.data; 
+        this.setState({ weatherDatas: persons,flag:true });
+        if(persons.error){
+          alert(persons.error.info)
+        }
+    })
    
 }
 
@@ -24,7 +30,7 @@ class CountryDetailsComponent extends Component{
         const { datas } = this.props
         console.log("propss",datas[0])
         return(
-          <>  {(this.state.flag ===true)? <CapitalWeather capital={datas[0].capital} /> : 
+          <>  {(this.state.flag ===true)? <CapitalWeather weatherDatas={this.state.weatherDatas} /> : 
          <> <table>
            <tr><th>Capital  </th>
             <th>population</th>

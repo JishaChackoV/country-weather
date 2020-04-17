@@ -6,41 +6,33 @@ class CapitalWeather extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            weatherDatas:null
         }
     }
-    onSubmit = () => {
-
-        axios.get(`http://api.weatherstack.com/current?access_key=69187d964fd1574bbd9472b7b570f0ee&query=${this.props.capital}`)
-            .then(res => {
-                const persons = res.data;
-                this.setState({ weatherDatas: persons });
-            })
-    }
+    
     render() {
 
-        const { datas } = this.props
-        console.log("pss",this.state.weatherDatas.current)
+        const { weatherDatas } = this.props
+        console.log("pss",weatherDatas.current)
         return (
             <>
-                <table>
+                <table border="1">
                     <tr><th>temperature  </th>
                         <th>weather_icons</th>
                         <th>wind_speed</th>
                         <th>precip</th>
 
                     </tr>
-                    <tr>
-                        <td>{this.state.weatherDatas.current.description}</td>
-                        <td><img src={this.state.weatherDatas.current.weather_icons} alt="flag" style={{ width: "50px" }} /></td>
-                        <td>{this.state.weatherDatas.wind_speed}</td>
-                        <td>{this.state.weatherDatas.precip}</td>
+                    {weatherDatas !==null&& <tr>
+                        {weatherDatas!==null&& <td>{weatherDatas.current.temperature}</td>}
+                        {weatherDatas !==null&&<td><img src={weatherDatas.current.weather_icons} alt="flag" style={{ width: "50px" }} /></td>}
+                        {weatherDatas&&<td>{weatherDatas.current.wind_speed}</td>}
+                        {weatherDatas&&<td>{weatherDatas.current.precip}</td>}
 
-                    </tr>
+                    </tr>}
 
 
                 </table>
-                <button onClick={this.onSubmit}>Capital Weather</button>
 
             </>)
     }
