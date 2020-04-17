@@ -24,10 +24,10 @@ class CapitalWeather extends Component {
 
                     </tr>
                     {weatherDatas !==null&& <tr>
-                        {weatherDatas!==null&& <td>{weatherDatas.current.temperature}</td>}
-                        {weatherDatas !==null&&<td><img src={weatherDatas.current.weather_icons} alt="flag" style={{ width: "50px" }} /></td>}
-                        {weatherDatas&&<td>{weatherDatas.current.wind_speed}</td>}
-                        {weatherDatas&&<td>{weatherDatas.current.precip}</td>}
+                        <td>{weatherDatas.current.temperature}</td>
+                       <td><img src={weatherDatas.current.weather_icons} alt="flag" style={{ width: "50px" }} /></td>
+                       <td>{weatherDatas.current.wind_speed}</td>
+                      <td>{weatherDatas.current.precip}</td>
 
                     </tr>}
 
